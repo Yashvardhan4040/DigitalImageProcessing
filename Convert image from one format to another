@@ -1,1 +1,25 @@
+from PIL import Image
+
+def convert_image(input_path, output_path, output_format):
+    try:
+        # Open the input image
+        with Image.open(input_path) as img:
+            # Check if the image has an alpha channel (transparency)
+            if img.mode == 'RGBA':
+                # If yes, convert to RGB mode before saving as JPEG
+                img = img.convert('RGB')
+            
+            # Save the image to the specified format
+            img.save(output_path, format=output_format)
+            print(f"Image converted and saved to {output_path} in {output_format} format.")
+    except Exception as e:
+        print(f"Error: {e}")
+
+if __name__ == "__main__":
+    # Example usage
+    input_path = "C:\\Users\\hp\\Pictures\\Screenshots\\Screenshot (1402).png"
+    output_path = "D:\\Yash photo,aadhar\\output_image.jpg"  # Change the extension to ".jpg"
+    output_format = "JPEG"  # Change the format to "JPEG"
+
+    convert_image(input_path, output_path, output_format)
 
