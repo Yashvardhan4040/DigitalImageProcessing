@@ -1,1 +1,69 @@
+import cv2
+import numpy as np
+from skimage import color
+from PIL import Image
+import matplotlib.pyplot as plt
+
+# Load the image
+image_path = "C:\\Users\\hp\\Pictures\\Screenshots\\Screenshot (1402).png"
+image = cv2.imread(image_path)
+
+# Convert the image to RGB (if it's in BGR)
+image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+# Convert RGB to other color spaces using OpenCV
+image_hsv = cv2.cvtColor(image_rgb, cv2.COLOR_RGB2HSV)
+image_lab = cv2.cvtColor(image_rgb, cv2.COLOR_RGB2LAB)
+image_yuv = cv2.cvtColor(image_rgb, cv2.COLOR_RGB2YUV)
+
+# Convert RGB to other color spaces using scikit-image
+image_gray = color.rgb2gray(image_rgb)
+image_xyz = color.rgb2xyz(image_rgb)
+image_hed = color.rgb2hed(image_rgb)
+
+# Convert RGB to other color spaces using Pillow
+image_cmyk = Image.fromarray(image_rgb).convert('CMYK')
+image_ycbcr = Image.fromarray(image_rgb).convert('YCbCr')
+
+# Display the converted images
+plt.figure(figsize=(12, 8))
+
+plt.subplot(3, 4, 1)
+plt.imshow(image_rgb)
+plt.title('RGB')
+
+plt.subplot(3, 4, 2)
+plt.imshow(image_hsv)
+plt.title('HSV')
+
+plt.subplot(3, 4, 3)
+plt.imshow(image_lab)
+plt.title('LAB')
+
+plt.subplot(3, 4, 4)
+plt.imshow(image_yuv)
+plt.title('YUV')
+
+plt.subplot(3, 4, 5)
+plt.imshow(image_gray, cmap='gray')
+plt.title('Grayscale')
+
+plt.subplot(3, 4, 6)
+plt.imshow(image_xyz)
+plt.title('XYZ')
+
+plt.subplot(3, 4, 7)
+plt.imshow(image_hed)
+plt.title('HED')
+
+plt.subplot(3, 4, 8)
+plt.imshow(image_cmyk)
+plt.title('CMYK')
+
+plt.subplot(3, 4, 9)
+plt.imshow(image_ycbcr)
+plt.title('YCbCr')
+
+plt.tight_layout()
+plt.show()
 
