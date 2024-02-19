@@ -1,1 +1,55 @@
+from PIL import Image
+import matplotlib.pyplot as plt
+
+def generate_grayscale(input_path, output_path):
+    try:
+        # Open the input image
+        with Image.open(input_path) as img:
+            # Convert the image to grayscale
+            grayscale_img = img.convert("L")
+
+            # Display the grayscale image
+            plt.imshow(grayscale_img, cmap='gray')
+            plt.axis('off')  # Hide axes
+            plt.title('Grayscale Image')
+            plt.show()
+
+            # Save the grayscale image
+            grayscale_img.save(output_path)
+
+            print(f"Grayscale image generated and saved to {output_path}.")
+    except Exception as e:
+        print(f"Error: {e}")
+
+def generate_negative(input_path, output_path):
+    try:
+        # Open the grayscale image
+        with Image.open(input_path) as grayscale_img:
+            # Generate the negative of the grayscale image
+            negative_img = Image.eval(grayscale_img, lambda x: 255 - x)
+
+            # Display the negative image
+            plt.imshow(negative_img, cmap='gray')
+            plt.axis('off')  # Hide axes
+            plt.title('Negative Image')
+            plt.show()
+
+            # Save the negative image
+            negative_img.save(output_path)
+
+            print(f"Negative image generated and saved to {output_path}.")
+    except Exception as e:
+        print(f"Error: {e}")
+
+if __name__ == "__main__":
+    # Example usage with the provided input and output paths
+    input_path = "C:\\Users\\hp\\Pictures\\Screenshots\\Screenshot (1402).png"
+    grayscale_output_path = "D:\\Yash photo,aadhar\\output_grayscale_image.png"
+    negative_output_path = "D:\\Yash photo,aadhar\\output_negative_image.png"
+
+    # Generate grayscale image
+    generate_grayscale(input_path, grayscale_output_path)
+
+    # Generate negative of grayscale image
+    generate_negative(grayscale_output_path, negative_output_path)
 
