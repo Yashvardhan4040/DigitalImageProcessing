@@ -1,0 +1,57 @@
+import cv2
+import matplotlib.pyplot as plt
+from PIL import Image
+import numpy as np
+
+# Read the image using OpenCV
+input_path = "C:\\Users\\hp\\Pictures\\Screenshots\\Screenshot (1402).png"
+image = cv2.imread(input_path)
+
+# Convert the image from BGR to RGB (OpenCV uses BGR by default)
+image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+# Create a single figure for displaying all images
+fig, axs = plt.subplots(2, 3, figsize=(15, 10))
+
+# Original Image
+axs[0, 0].imshow(image_rgb)
+axs[0, 0].set_title('Original Image')
+axs[0, 0].axis('off')
+
+# Cropping the image
+cropped_image = image_rgb[100:400, 200:500]
+axs[0, 1].imshow(cropped_image)
+axs[0, 1].set_title('Cropped Image')
+axs[0, 1].axis('off')
+
+# Resizing the image using OpenCV
+resized_image = cv2.resize(image_rgb, (300, 200))
+axs[0, 2].imshow(resized_image)
+axs[0, 2].set_title('Resized Image')
+# axs[0, 2].axis('off')
+
+# Scaling the image using PIL
+pil_image = Image.fromarray(image_rgb)
+scaled_image = pil_image.resize((image_rgb.shape[1] * 2, image_rgb.shape[0] * 2))
+scaled_image_rgb = np.array(scaled_image)
+axs[1, 0].imshow(scaled_image_rgb)
+axs[1, 0].set_title('Scaled Image')
+axs[1, 0].axis('off')
+
+# Flipping the image using OpenCV
+flipped_image = cv2.flip(image_rgb, 1)
+axs[1, 1].imshow(flipped_image)
+axs[1, 1].set_title('Flipped Image')
+axs[1, 1].axis('off')
+
+# Hide the last subplot, if not used
+axs[1, 2].axis('off')
+
+# Adjust layout
+plt.tight_layout()
+
+# Save the processed image
+output_path = "D:\\Yash photo,aadhar\\output_image.png"
+plt.savefig(output_path)
+
+plt.show()
